@@ -44,24 +44,23 @@ function App() {
     }
 
     const ids = document?.getElementById(`${i}`);
-    ids.innerHTML = options[alternate];
+    if (ids.textContent === '') {
+      ids.innerHTML = options[alternate];
+      setMap({...mapItems, [`${ids.id}`]: options[alternate]});
+      setAlternate(() => {
+        if (alternate + 1 > options.length -1) {
+          return 0;
+        } else {
+          return nextAlternate;
+        }
+      });
+    }
 
     if (ids.textContent === 'X') {
       ids.style.color = '#5c7cfa'
     } else {
       ids.style.color = '#ff6b6b'
     }
-
-
-    setMap({...mapItems, [`${ids.id}`]: options[alternate]});
-
-    setAlternate(() => {
-      if (alternate + 1 > options.length -1) {
-        return 0;
-      } else {
-        return nextAlternate;
-      }
-    });
   };
 
   const clean = () => {

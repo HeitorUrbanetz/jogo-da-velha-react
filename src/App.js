@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { initialMap } from "./functions/initialMap";
+import { winnerY, winnerX } from "./functions/setWin";
 
 function App() {
   const [alternate, setAlternate] = useState(0);
@@ -6,7 +8,7 @@ function App() {
   const options = ['X', 'O'];
   const [win, setWin] = useState('');
 
-  const [mapItens, setMap] = useState({
+  const [mapItems, setMap] = useState({
     "1": "",
     "4": "",
     "7": "",
@@ -17,18 +19,6 @@ function App() {
     "6": "",
     "9": ""
   });
-
-  const initialMap = {
-      "1": "",
-      "4": "",
-      "7": "",
-      "2": "",
-      "5": "",
-      "8": "",
-      "3": "",
-      "6": "",
-      "9": ""
-  }
 
   const renders = () => {
     const render = [];
@@ -60,67 +50,9 @@ function App() {
   };
 
   useEffect(() => {
-    if (mapItens['1'] === 'X' && mapItens['2'] === 'X' && mapItens['3'] === 'X') {
-      setWin('X GANHOU');
-    } else if (mapItens['4'] === 'X' && mapItens['5'] === 'X' && mapItens['6'] === 'X') {
-      setWin('X GANHOU');
-    } else if (mapItens['7'] === 'X' && mapItens['8'] === 'X' && mapItens['9'] === 'X') {
-      setWin('X GANHOU');
-    } else if (mapItens['1'] === 'X' && mapItens['4'] === 'X' && mapItens['7'] === 'X') {
-      setWin('X GANHOU');
-    } else if (mapItens['2'] === 'X' && mapItens['5'] === 'X' && mapItens['9'] === 'X' && mapItens['8'] !== '' && mapItens['8'] !== 'O') {
-      setWin('X GANHOU');
-    } else if (mapItens['2'] === 'X' && mapItens['5'] === 'X' && mapItens['8'] === 'X') {
-      setWin('X GANHOU');
-    } else if (mapItens['3'] === 'X' && mapItens['6'] === 'X' && mapItens['9'] === 'X') {
-      setWin('X GANHOU');
-    } else if (mapItens['1'] === 'X' && mapItens['5'] === 'X' && mapItens['9'] === 'X') {
-      setWin('X GANHOU');
-    } else if (mapItens['3'] === 'X' && mapItens['5'] === 'X' && mapItens['7'] === 'X') {
-      setWin('X GANHOU');
-    } 
-  }, [mapItens]);
-
-  useEffect(() => {
-    if (mapItens['1'] === 'O' && mapItens['2'] === 'O' && mapItens['3'] === 'O') {
-      setWin('O GANHOU');
-    } else if (mapItens['4'] === 'O' && mapItens['5'] === 'O' && mapItens['6'] === 'O') {
-      setWin('O GANHOU');
-    } else if (mapItens['7'] === 'O' && mapItens['8'] === 'O' && mapItens['9'] === 'O') {
-      setWin('O GANHOU');
-    } else if (mapItens['1'] === 'O' && mapItens['4'] === 'O' && mapItens['7'] === 'O') {
-      setWin('O GANHOU');
-    } else if (mapItens['2'] === 'O' && mapItens['5'] === 'O' && mapItens['9'] === 'O' && mapItens['8'] !== '' && mapItens['8'] !== 'X') {
-      setWin('O GANHOU');
-    } else if (mapItens['2'] === 'O' && mapItens['5'] === 'O' && mapItens['8'] === 'O') {
-      setWin('O GANHOU');
-    } else if (mapItens['3'] === 'O' && mapItens['6'] === 'O' && mapItens['9'] === 'O') {
-      setWin('O GANHOU');
-    } else if (mapItens['1'] === 'O' && mapItens['5'] === 'O' && mapItens['9'] === 'O') {
-      setWin('O GANHOU');
-    } else if (mapItens['3'] === 'O' && mapItens['5'] === 'O' && mapItens['7'] === 'O') {
-      setWin('O GANHOU');
-    } else if (mapItens['1'] && 
-    mapItens['2'] !== '' && 
-    mapItens['3'] !== '' && 
-    mapItens['4'] !== '' && 
-    mapItens['5'] !== '' && 
-    mapItens['6'] !== '' && 
-    mapItens['7'] !== '' && 
-    mapItens['8'] !== '' && 
-    mapItens['9']) {
-      setWin('DEU VELHA!');
-    }
-  }, [mapItens]);
-
-  useEffect(() => {
-    for (let pos in mapItens) {
-      const value = mapItens[pos];
-      if (value !== '' && value === 'X') {
-        console.log(value)
-      }
-    }
-  }, [mapItens]);
+    winnerX(mapItems, setWin);
+    winnerY(mapItems, setWin);
+  }, [mapItems]);
 
   const showV = (i) => {
     if (win !== '') {
@@ -137,7 +69,7 @@ function App() {
     }
 
 
-    setMap({...mapItens, [`${ids.id}`]: options[alternate]});
+    setMap({...mapItems, [`${ids.id}`]: options[alternate]});
 
     setAlternate(() => {
       if (alternate + 1 > options.length -1) {
@@ -156,7 +88,7 @@ function App() {
       });
       setMap(initialMap);
       setWin('');
-  }
+  };
 
   return (
     <div className="App">

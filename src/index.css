@@ -6,6 +6,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 .App {
   width: 100vw;
   height: 100vh;
@@ -15,8 +19,9 @@
 }
 
 .game {
-  width: 600px;
-  height: 600px;
+  width: 60rem;
+  height: 60rem;
+  margin-left: 20%;
 }
 
 .game-pos{
@@ -29,12 +34,12 @@
 .square{
   width: 33.3%;
   height: 100%;
-  border-right: 2px solid #333;
-  border-bottom: 2px solid #333;
+  border-right: 0.2rem solid #333;
+  border-bottom: 0.2rem solid #333;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 100px;
+  font-size: 400%;
   cursor: pointer;
 }
 
@@ -49,31 +54,28 @@
 .square-bottom{
   width: 33.3%;
   height: 100%;
-  border-right: 2px solid #333;
+  border-right: 0.2rem solid #333;
   border-bottom: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 100px;
+  font-size: 400%;
   cursor: pointer;
 }
 
 .buttons {
-  position: fixed;
-  width: 600px;
-  height: 400px;
-  top: 25%;
-  right: 5%;
+  width: 60rem;
+  height: 40rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 25px;
+  gap: 2.5rem;
 }
 
 .buttons button {
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 1rem;
+  padding: 2rem;
   border: none;
   cursor: pointer;
   background-color: #ff6b6b;
@@ -81,7 +83,7 @@
 }
 
 .buttons p, .buttons strong{
-  font-size: 25px;
+  font-size: 2.5rem;
 }
 
 .victory {
@@ -93,6 +95,48 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 2rem;
 }
 
+.points {
+  position: absolute;
+  top: 5%;
+  right: 18.5%;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+.placar {
+  width: 100%;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.player-A {
+  color: #5c7cfa;
+}
+
+.player-B {
+  color: #ff6b6b;
+  margin-bottom: 10px;
+}
+
+.me {
+  position: absolute;
+  top: 1%;
+  left: 1%;
+  font-size: 10px;
+  font-weight: bold;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 5px;
+  background-color: rgb(207, 205, 205);
+}

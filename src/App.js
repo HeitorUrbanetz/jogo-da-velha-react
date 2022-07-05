@@ -7,7 +7,10 @@ function App() {
   const [alternate, setAlternate] = useState(0);
   const [nextAlternate] = useState(alternate + 1);
   const options = ['X', 'O'];
+  const players = ['A', 'B'];
   const [win, setWin] = useState('');
+  const [points, setPoints] = useState(0);
+  const [pointsB, setPointsB] = useState(0);
 
   const [mapItems, setMap] = useState({
     "1": "",
@@ -22,8 +25,10 @@ function App() {
   });
 
   useEffect(() => {
-    winnerX(mapItems, setWin);
-    winnerY(mapItems, setWin);
+    winnerX(mapItems, setWin, setPoints);
+    winnerY(mapItems, setWin, setPointsB);
+
+    console.log(mapItems)
   }, [mapItems]);
 
 
@@ -77,22 +82,29 @@ function App() {
           </div>
         </div>
 
+        <div className="points">
+          <h1 className="placar">Placar </h1>
+          <h1 className="player-A">Jogador A: {points}</h1>
+          <h1 className="player-B">Jogador B: {pointsB}</h1>
+        </div>
+
         <div className="buttons">
           {
             (win === '') ? 
-            <div>
-              <p>VEZ DO <strong>{options[alternate]}</strong> JOGAR</p>
+            <div style={options[alternate] === 'X' ? {color:'#5c7cfa'} : {color: "#ff6b6b"} }>
+              <p>VEZ DO <strong>{players[alternate]}</strong> JOGAR</p>
             </div> : 
 
             <div className="gain">
             <div className="victory">
-              <h1><strong style={(win === 'X GANHOU') ? {color:'#5c7cfa'} : {color: "#ff6b6b"}}>{win}</strong></h1>
+              <h1><strong style={(win === 'A GANHOU') ? {color:'#5c7cfa'} : {color: "#ff6b6b"}}>{win}</strong></h1>
             </div>
               <button onClick={clean}>RECOMEÇAR</button>
             </div>
           }
-            
         </div>
+
+        <div className="me">Made by Heitor Urbanetz</div>
     </div>
   );
 }

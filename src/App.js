@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { initialMap } from "./functions/initialMap";
 import { winnerY, winnerX } from "./functions/setWin";
+import { renders, rendersMID, rendersBottom } from "./functions/renders";
 
 function App() {
   const [alternate, setAlternate] = useState(0);
@@ -20,39 +21,11 @@ function App() {
     "9": ""
   });
 
-  const renders = () => {
-    const render = [];
-
-    for (let i = 1, max = 4; i < max; i++) {
-         render.push(
-          <div key={i} id={i} className="square" onClick={() => showV(i)}></div>
-        )
-      }
-      return render;
-  };
-  const rendersMID = () => {
-    const render = [];
-    for (let i = 4, max = 7; i < max; i++) {
-         render.push(
-          <div key={i} id={i} className="square" onClick={() => showV(i)}></div>
-        )
-      }
-      return render;
-  };
-  const rendersBottom = () => {
-    const render = [];
-    for (let i = 7, max = 10; i < max; i++) {
-         render.push(
-          <div key={i} id={i} className="square-bottom" onClick={() => showV(i)}></div>
-        )
-      }
-      return render;
-  };
-
   useEffect(() => {
     winnerX(mapItems, setWin);
     winnerY(mapItems, setWin);
   }, [mapItems]);
+
 
   const showV = (i) => {
     if (win !== '') {
@@ -94,13 +67,13 @@ function App() {
     <div className="App">
         <div className="game">
           <div className={`game-pos`}>
-              {renders()}
+              {renders(showV)}
           </div>
           <div className="game-pos">
-              {rendersMID()}
+              {rendersMID(showV)}
           </div>
           <div className="game-pos">
-              {rendersBottom()}
+              {rendersBottom(showV)}
           </div>
         </div>
 

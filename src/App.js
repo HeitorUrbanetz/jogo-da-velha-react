@@ -27,9 +27,15 @@ function App() {
   useEffect(() => {
     winnerX(mapItems, setWin, setPoints);
     winnerY(mapItems, setWin, setPointsB);
-
-    console.log(mapItems)
   }, [mapItems]);
+
+  useEffect(() => {
+    const victory = document?.querySelector('.show-victory');
+
+    if (victory?.textContent === 'DEU VELHA !') {
+      victory.style.color = '#000';
+    }
+  }, [win]);
 
 
   const showV = (i) => {
@@ -97,7 +103,7 @@ function App() {
 
             <div className="gain">
             <div className="victory">
-              <h1><strong style={(win === 'A GANHOU') ? {color:'#5c7cfa'} : {color: "#ff6b6b"}}>{win}</strong></h1>
+              <h1><strong className="show-victory" style={(win === 'Jogador A GANHOU') ? {color:'#5c7cfa'} : {color: "#ff6b6b"}}>{win.toUpperCase()} !</strong></h1>
             </div>
               <button onClick={clean}>RECOMEÇAR</button>
             </div>
